@@ -94,6 +94,9 @@ int main() {
 		}
 	} while (fin != 0);
 	cout << "Sum is: " << sum << endl;
+  
+  cout << "MY CODE:" << endl;
+  cout << (Fraction(5) == 5.0) << endl;
 
 	return 0;
 
