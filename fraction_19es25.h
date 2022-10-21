@@ -33,100 +33,52 @@ public:
   int denominator();
 
   // Unary Overloads
-  friend Fraction &operator+(Fraction &F);
-  friend Fraction &operator-(Fraction &F);
-  friend Fraction &operator++(Fraction);       // Prefix
-  friend Fraction &operator++(Fraction, int);  // Postfix
+  Fraction &operator+(Fraction &F);
+  Fraction &operator-(Fraction &F);
+  Fraction &operator++();       // Prefix
+  Fraction &operator++(int);  // Postfix
   
   // Equality (Covering all reasonably comparable types)
   friend bool operator==(const Fraction &F1, const Fraction &F2);
   friend bool operator==(int i, const Fraction &F);
-  friend bool operator==(const Fraction &F1, int i);
-  friend bool operator==(float i, const Fraction &F);
-  friend bool operator==(const Fraction &F1, float i);
+  friend bool operator==(const Fraction &F, int i);
   friend bool operator==(double i, const Fraction &F);
-  friend bool operator==(const Fraction &F1, double i);
-  friend bool operator==(long i, const Fraction &F);
-  friend bool operator==(const Fraction &F1, long i);
-  friend bool operator==(short i, const Fraction &F);
-  friend bool operator==(const Fraction &F1, short i);
-  friend bool operator==(long long i, const Fraction &F);
-  friend bool operator==(const Fraction &F1, long long i);
+  friend bool operator==(const Fraction &F, double i);
 
   // Inequality
   friend bool operator!=(const Fraction &F1, const Fraction &F2);
   friend bool operator!=(int i, const Fraction &F);
-  friend bool operator!=(const Fraction &F1, int i);
-  friend bool operator!=(float i, const Fraction &F);
-  friend bool operator!=(const Fraction &F1, float i);
+  friend bool operator!=(const Fraction &F, int i);
   friend bool operator!=(double i, const Fraction &F);
-  friend bool operator!=(const Fraction &F1, double i);
-  friend bool operator!=(long i, const Fraction &F);
-  friend bool operator!=(const Fraction &F1, long i);
-  friend bool operator!=(short i, const Fraction &F);
-  friend bool operator!=(const Fraction &F1, short i);
-  friend bool operator!=(long long i, const Fraction &F);
-  friend bool operator!=(const Fraction &F1, long long i);
+  friend bool operator!=(const Fraction &F, double i);
   
   // Greater
   friend bool operator>(const Fraction &F1, const Fraction &F2);
   friend bool operator>(int i, const Fraction &F);
-  friend bool operator>(const Fraction &F1, int i);
-  friend bool operator>(float i, const Fraction &F);
-  friend bool operator>(const Fraction &F1, float i);
+  friend bool operator>(const Fraction &F, int i);
   friend bool operator>(double i, const Fraction &F);
-  friend bool operator>(const Fraction &F1, double i);
-  friend bool operator>(long i, const Fraction &F);
-  friend bool operator>(const Fraction &F1, long i);
-  friend bool operator>(short i, const Fraction &F);
-  friend bool operator>(const Fraction &F1, short i);
-  friend bool operator>(long long i, const Fraction &F);
-  friend bool operator>(const Fraction &F1, long long i);
+  friend bool operator>(const Fraction &F, double i);
   
   // Equality or Greater
   friend bool operator>=(const Fraction &F1, const Fraction &F2);
   friend bool operator>=(int i, const Fraction &F);
-  friend bool operator>=(const Fraction &F1, int i);
-  friend bool operator>=(float i, const Fraction &F);
-  friend bool operator>=(const Fraction &F1, float i);
+  friend bool operator>=(const Fraction &F, int i);
   friend bool operator>=(double i, const Fraction &F);
-  friend bool operator>=(const Fraction &F1, double i);
-  friend bool operator>=(long i, const Fraction &F);
-  friend bool operator>=(const Fraction &F1, long i);
-  friend bool operator>=(short i, const Fraction &F);
-  friend bool operator>=(const Fraction &F1, short i);
-  friend bool operator>=(long long i, const Fraction &F);
-  friend bool operator>=(const Fraction &F1, long long i);
+  friend bool operator>=(const Fraction &F, double i);
   
   // Equality or Lesser
   friend bool operator<=(const Fraction &F1, const Fraction &F2);
   friend bool operator<=(int i, const Fraction &F);
-  friend bool operator<=(const Fraction &F1, int i);
-  friend bool operator<=(float i, const Fraction &F);
-  friend bool operator<=(const Fraction &F1, float i);
+  friend bool operator<=(const Fraction &F, int i);
   friend bool operator<=(double i, const Fraction &F);
-  friend bool operator<=(const Fraction &F1, double i);
-  friend bool operator<=(long i, const Fraction &F);
-  friend bool operator<=(const Fraction &F1, long i);
-  friend bool operator<=(short i, const Fraction &F);
-  friend bool operator<=(const Fraction &F1, short i);
-  friend bool operator<=(long long i, const Fraction &F);
-  friend bool operator<=(const Fraction &F1, long long i);
+  friend bool operator<=(const Fraction &F, double i);
   
   // Lesser
   friend bool operator<(const Fraction &F1, const Fraction &F2);
   friend bool operator<(int i, const Fraction &F);
-  friend bool operator<(const Fraction &F1, int i);
-  friend bool operator<(float i, const Fraction &F);
-  friend bool operator<(const Fraction &F1, float i);
+  friend bool operator<(const Fraction &F, int i);
   friend bool operator<(double i, const Fraction &F);
-  friend bool operator<(const Fraction &F1, double i);
-  friend bool operator<(long i, const Fraction &F);
-  friend bool operator<(const Fraction &F1, long i);
-  friend bool operator<(short i, const Fraction &F);
-  friend bool operator<(const Fraction &F1, short i);
-  friend bool operator<(long long i, const Fraction &F);
-  friend bool operator<(const Fraction &F1, long long i);
+  friend bool operator<(const Fraction &F, double i);
 
   /* Binary Overloads */
   
@@ -135,70 +87,35 @@ public:
   friend istream &operator>>(istream  &input, Fraction &F);
   
   // Assignment Overloads (Added sensible extras)
-  Fraction operator+=(Fraction &F2);
-  Fraction operator-=(Fraction &F2);
-  Fraction operator*=(Fraction &F2);
-  Fraction operator/=(Fraction &F2);
+  Fraction &operator+=(Fraction &F);
+  Fraction &operator-=(Fraction &F);
+  Fraction &operator*=(Fraction &F);
+  Fraction &operator/=(Fraction &F);
   
+  Fraction &operator+=(int i);
+  Fraction &operator-=(int i);
+  Fraction &operator*=(int i);
+  Fraction &operator/=(int i);
+
   // Addition overloads
   friend Fraction &operator+(const Fraction &F1, const Fraction &F2);
   friend Fraction &operator+(int i, const Fraction &F);
   friend Fraction &operator+(const Fraction &F1, int i);
-  friend Fraction &operator+(float i, const Fraction &F);
-  friend Fraction &operator+(const Fraction &F1, float i);
-  friend Fraction &operator+(double i, const Fraction &F);
-  friend Fraction &operator+(const Fraction &F1, double i);
-  friend Fraction &operator+(long i, const Fraction &F);
-  friend Fraction &operator+(const Fraction &F1, long i);
-  friend Fraction &operator+(short i, const Fraction &F);
-  friend Fraction &operator+(const Fraction &F1, short i);
-  friend Fraction &operator+(long long i, const Fraction &F);
-  friend Fraction &operator+(const Fraction &F1, long long i);
   
   // Subtraction overloads
   friend Fraction &operator-(const Fraction &F1, const Fraction &F2);
   friend Fraction &operator-(int i, const Fraction &F);
   friend Fraction &operator-(const Fraction &F1, int i);
-  friend Fraction &operator-(float i, const Fraction &F);
-  friend Fraction &operator-(const Fraction &F1, float i);
-  friend Fraction &operator-(double i, const Fraction &F);
-  friend Fraction &operator-(const Fraction &F1, double i);
-  friend Fraction &operator-(long i, const Fraction &F);
-  friend Fraction &operator-(const Fraction &F1, long i);
-  friend Fraction &operator-(short i, const Fraction &F);
-  friend Fraction &operator-(const Fraction &F1, short i);
-  friend Fraction &operator-(long long i, const Fraction &F);
-  friend Fraction &operator-(const Fraction &F1, long long i);
 
   // Multiplication overloads
   friend Fraction &operator*(const Fraction &F1, const Fraction &F2);
   friend Fraction &operator*(int i, const Fraction &F);
   friend Fraction &operator*(const Fraction &F1, int i);
-  friend Fraction &operator*(float i, const Fraction &F);
-  friend Fraction &operator*(const Fraction &F1, float i);
-  friend Fraction &operator*(double i, const Fraction &F);
-  friend Fraction &operator*(const Fraction &F1, double i);
-  friend Fraction &operator*(long i, const Fraction &F);
-  friend Fraction &operator*(const Fraction &F1, long i);
-  friend Fraction &operator*(short i, const Fraction &F);
-  friend Fraction &operator*(const Fraction &F1, short i);
-  friend Fraction &operator*(long long i, const Fraction &F);
-  friend Fraction &operator*(const Fraction &F1, long long i);
   
   // Division overloads
   friend Fraction &operator/(const Fraction &F1, const Fraction &F2);
   friend Fraction &operator/(int i, const Fraction &F);
   friend Fraction &operator/(const Fraction &F1, int i);
-  friend Fraction &operator/(float i, const Fraction &F);
-  friend Fraction &operator/(const Fraction &F1, float i);
-  friend Fraction &operator/(double i, const Fraction &F);
-  friend Fraction &operator/(const Fraction &F1, double i);
-  friend Fraction &operator/(long i, const Fraction &F);
-  friend Fraction &operator/(const Fraction &F1, long i);
-  friend Fraction &operator/(short i, const Fraction &F);
-  friend Fraction &operator/(const Fraction &F1, short i);
-  friend Fraction &operator/(long long i, const Fraction &F);
-  friend Fraction &operator/(const Fraction &F1, long long i);
   
 };
 
