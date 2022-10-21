@@ -3,6 +3,7 @@
  * You must satisfy all tests in this file, but may add some of your own.
  */
 #include <iostream>
+#include <stdexcept>
 using namespace std;
 
 #include "fraction_19es25.h"	// Add your netid to the #include

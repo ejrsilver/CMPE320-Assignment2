@@ -8,11 +8,13 @@
 #include "fraction_19es25.h"
 #include <stdexcept>
 #include <iostream>
+#include <cstdlib>
+
 
 using namespace std;
 
 const char * FractionException::what() const throw() {
-  return "Invalid Fraction!";
+  return "Invalid Fraction! Cannot divide by zero!";
 }
 
 int Fraction::gcd(int a, int b) {
@@ -26,6 +28,7 @@ int Fraction::gcd(int a, int b) {
       b = rem;
       rem = a%b;
     }
+    return b;
   }
   else {
     int rem = b % a;
@@ -34,9 +37,8 @@ int Fraction::gcd(int a, int b) {
       a = rem;
       rem = b%a;
     }
+    return a;
   }
-  
-  return b;
 }
 
 Fraction::Fraction() {
@@ -53,10 +55,10 @@ Fraction::Fraction(int n, int d){
   }
   // If the denominator is negative, move the negative to the numerator.
   else if(d < 0) {
-    d = +d;
+    d = abs(d);
     n = -n;
   }
-  int div = gcd(n,d);
+  int div = gcd(abs(n),d);
   num = n/div;
   denom = d/div;
 }
@@ -70,13 +72,9 @@ int Fraction::denominator(){
 
 /* Overloads */
 // Unary Overloads
-Fraction &Fraction::operator+(Fraction &F) {
-  F.num = +F.num;
-  return F;
-}
-Fraction &Fraction::operator-(Fraction &F) {
-  F.num = -F.num;
-  return F;
+Fraction &Fraction::operator-() {
+  this->num = -this->num;
+  return *this;
 }
 // Prefix
 Fraction &Fraction::operator++() {

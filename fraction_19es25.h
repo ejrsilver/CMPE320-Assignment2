@@ -7,8 +7,8 @@
 
 #include <stdexcept>
 #include <iostream>
-#ifndef fraction_h
-#define fraction_h
+#ifndef fraction_19es25_h
+#define fraction_19es25_h
 
 using namespace std;
 
@@ -33,8 +33,7 @@ public:
   int denominator();
 
   // Unary Overloads
-  Fraction &operator+(Fraction &F);
-  Fraction &operator-(Fraction &F);
+  Fraction &operator-();
   Fraction &operator++();       // Prefix
   Fraction &operator++(int);  // Postfix
   

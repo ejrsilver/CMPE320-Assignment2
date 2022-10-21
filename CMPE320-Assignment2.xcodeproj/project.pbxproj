@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		058F9A0128FF544500351AC7 /* fraction_19es25.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 058F9A0028FF544500351AC7 /* fraction_19es25.cpp */; };
-		058F9A0828FF6DE800351AC7 /* FractionTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 058F9A0728FF6DE800351AC7 /* FractionTest.cpp */; };
+		058F9A0C29026BB100351AC7 /* FractionTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 058F9A0B29026BB100351AC7 /* FractionTest.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,8 +26,8 @@
 /* Begin PBXFileReference section */
 		058F99FD28FF544500351AC7 /* CMPE320-Assignment2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CMPE320-Assignment2"; sourceTree = BUILT_PRODUCTS_DIR; };
 		058F9A0028FF544500351AC7 /* fraction_19es25.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fraction_19es25.cpp; sourceTree = "<group>"; };
-		058F9A0728FF6DE800351AC7 /* FractionTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FractionTest.cpp; sourceTree = "<group>"; };
 		058F9A0928FF6E0400351AC7 /* fraction_19es25.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fraction_19es25.h; sourceTree = "<group>"; };
+		058F9A0B29026BB100351AC7 /* FractionTest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FractionTest.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,7 +46,7 @@
 			children = (
 				058F9A0928FF6E0400351AC7 /* fraction_19es25.h */,
 				058F9A0028FF544500351AC7 /* fraction_19es25.cpp */,
-				058F9A0728FF6DE800351AC7 /* FractionTest.cpp */,
+				058F9A0B29026BB100351AC7 /* FractionTest.cpp */,
 				058F99FE28FF544500351AC7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -117,7 +117,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				058F9A0128FF544500351AC7 /* fraction_19es25.cpp in Sources */,
-				058F9A0828FF6DE800351AC7 /* FractionTest.cpp in Sources */,
+				058F9A0C29026BB100351AC7 /* FractionTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
