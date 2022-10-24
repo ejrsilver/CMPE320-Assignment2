@@ -82,6 +82,7 @@ int main() {
 
 	// Test input, exception and +=:
 	Fraction sum(0);
+
 	Fraction fin;
 	cout << "\nSumming fractions. Enter fractions as \"1/2\" or just enter a single integer." << endl;
 	cout << "Enter zero to end the summation:" << endl;
@@ -96,8 +97,55 @@ int main() {
 	} while (fin != 0);
 	cout << "Sum is: " << sum << endl;
   
-  cout << "MY CODE:" << endl;
-  cout << (Fraction(5) == 5.0) << endl;
+  cout << "\n\nMY CODE:" << endl;
+  cout << "Comparisons:" << endl;
+  cout << (Fraction(5) == 5.0);//1
+  cout << (5.0 == Fraction(5));//1
+  cout << (Fraction(5) != 5.0);//0
+  cout << (5.0 != Fraction(5));//0
+  cout << (3.24 == Fraction(5));//0
+  cout << (Fraction(5) == 3.24);//0
+  cout << (3.24 != Fraction(5));//1
+  cout << (Fraction(5) != 3.24);//1
+  cout << (3.24 < Fraction(5));//1
+  cout << (Fraction(5) < 3.24);//0  ---------------
+  cout << (3.24 <= Fraction(5));//1
+  cout << (Fraction(5) <= 3.24);//0 ---------------
+  cout << (3.24 >= Fraction(5));//0 ---------------
+  cout << (Fraction(5) >= 3.24);//1
+  cout << (3.24 > Fraction(5));//0
+  cout << (Fraction(5) > 3.24) << endl;//1
+
+  cout << "Expected:" << endl;
+  cout << "1100001110100101" << endl;
+
+  cout << "\nArithmetic:" << endl;
+
+  Fraction rgdfd = Fraction(25,100); //  1/4
+  Fraction fuqw = Fraction(5,10);    //  1/2
+
+  cout << rgdfd << endl;
+  
+  rgdfd+=10;
+  cout << rgdfd << endl;
+  rgdfd-=10;
+  cout << rgdfd << endl;
+  rgdfd*=10;
+  cout << rgdfd << endl;
+  rgdfd/=5;
+  cout << rgdfd << endl;
+    
+  rgdfd+=fuqw;
+  cout << rgdfd << endl;
+  rgdfd-=fuqw;
+  cout << rgdfd << endl;
+  rgdfd*=fuqw;
+  cout << rgdfd << endl;
+  rgdfd /= fuqw;
+  cout << rgdfd << endl;
+  rgdfd = Fraction(0);
+  rgdfd += fuqw;
+  cout << rgdfd << endl;
 
 	return 0;
 

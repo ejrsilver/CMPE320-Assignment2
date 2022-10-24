@@ -9,7 +9,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <cstdlib>
-
+#include <string>
 
 using namespace std;
 
@@ -71,29 +71,56 @@ int Fraction::denominator(){
 }
 
 /* Overloads */
+
 // Unary Overloads
 Fraction &Fraction::operator-() {
   this->num = -this->num;
   return *this;
 }
-// Prefix
-Fraction &Fraction::operator++() {
-  this->num+=this->denom;
+// Define prefix increment operator.
+Fraction& Fraction::operator++() {
+  num+=denom;
   return *this;
 }
-// Postfix
-Fraction &Fraction::operator++(int) {
-  Fraction * temp = this;
-  this->num+=this->denom;
-  return *temp;
+// Define postfix increment operator.
+Fraction Fraction::operator++(int) {
+   Fraction temp = *this;
+   ++*this;
+   return temp;
+}
+// Define prefix decrement operator.
+Fraction& Fraction::operator--() {
+  num-=denom;
+  return *this;
+}
+// Define postfix decrement operator.
+Fraction Fraction::operator--(int) {
+   Fraction temp = *this;
+   --*this;
+   return temp;
 }
 
+// Overload Stream operators
 ostream &operator<<( ostream &output, const Fraction &F ) {
   output << F.num << "/" << F.denom;
   return output;
 }
 istream &operator>>( istream  &input, Fraction &F ) {
-  input >> F.num >> F.denom;
+  string sinput;
+  input >> sinput;
+  
+  unsigned long idelim = sinput.find('/');
+  
+  // If there's no fraction identifier
+  if(idelim > sinput.length()) {
+    F.num = stoi(sinput);
+    F.denom = 1;
+  }
+  else {
+    F.num = stoi(sinput.substr(0, idelim));
+    F.denom = stoi(sinput.substr(idelim+1));
+  }
+  
   return input;
 }
 
@@ -103,8 +130,8 @@ bool operator==(const Fraction &F1, const Fraction &F2) {
 }
 bool operator==(int i, const Fraction &F)       {  return F.num == i*F.denom;  }
 bool operator==(const Fraction &F, int i)       {  return F.num == i*F.denom;  }
-bool operator==(double d, const Fraction &F)    {  return F.num == d*F.denom;  }
-bool operator==(const Fraction &F, double d)    {  return F.num == d*F.denom;  }
+bool operator==(double d, const Fraction &F)    {  return ((double)F.num)/((double)F.denom) == d;  }
+bool operator==(const Fraction &F, double d)    {  return ((double)F.num)/((double)F.denom) == d;  }
 
 // Inequality
 bool operator!=(const Fraction &F1, const Fraction &F2) {
@@ -112,140 +139,190 @@ bool operator!=(const Fraction &F1, const Fraction &F2) {
 }
 bool operator!=(int i, const Fraction &F)       {  return F.num != i*F.denom;  }
 bool operator!=(const Fraction &F, int i)       {  return F.num != i*F.denom;  }
-bool operator!=(double d, const Fraction &F)    {  return F.num != d*F.denom;  }
-bool operator!=(const Fraction &F, double d)    {  return F.num != d*F.denom;  }
+bool operator!=(double d, const Fraction &F)    {  return ((double)F.num)/((double)F.denom) != d;  }
+bool operator!=(const Fraction &F, double d)    {  return ((double)F.num)/((double)F.denom) != d;  }
 
 // Greater
 bool operator>(const Fraction &F1, const Fraction &F2) {
   return (F1.num*F2.denom > F2.num*F1.denom);
 }
-bool operator>(int i, const Fraction &F)        {  return F.num > i*F.denom;  }
+bool operator>(int i, const Fraction &F)        {  return !(F.num > i*F.denom);  }
 bool operator>(const Fraction &F, int i)        {  return F.num > i*F.denom;  }
-bool operator>(double d, const Fraction &F)     {  return F.num > d*F.denom;  }
-bool operator>(const Fraction &F, double d)     {  return F.num > d*F.denom;  }
+bool operator>(double d, const Fraction &F)     {  return !((double)F.num)/((double)F.denom) > d;  }
+bool operator>(const Fraction &F, double d)     {  return ((double)F.num)/((double)F.denom) > d;  }
 
 // Equality or Greater
 bool operator>=(const Fraction &F1, const Fraction &F2) {
   return (F1.num*F2.denom >= F2.num*F1.denom);
 }
-bool operator>=(int i, const Fraction &F)       {  return F.num >= i*F.denom;  }
+bool operator>=(int i, const Fraction &F)       {  return !(F.num >= i*F.denom);  }
 bool operator>=(const Fraction &F, int i)       {  return F.num >= i*F.denom;  }
-bool operator>=(double d, const Fraction &F)    {  return F.num >= d*F.denom;  }
-bool operator>=(const Fraction &F, double d)    {  return F.num >= d*F.denom;  }
+bool operator>=(double d, const Fraction &F)    {  return !((double)F.num)/((double)F.denom) >= d;  }
+bool operator>=(const Fraction &F, double d)    {  return ((double)F.num)/((double)F.denom) >= d;  }
 
 // Equality or Lesser
 bool operator<=(const Fraction &F1, const Fraction &F2) {
   return (F1.num*F2.denom <= F2.num*F1.denom);
 }
-bool operator<=(int i, const Fraction &F)       {  return F.num >= i*F.denom;  }
-bool operator<=(const Fraction &F, int i)       {  return F.num >= i*F.denom;  }
-bool operator<=(double d, const Fraction &F)    {  return F.num >= d*F.denom;  }
-bool operator<=(const Fraction &F, double d)    {  return F.num >= d*F.denom;  }
+bool operator<=(int i, const Fraction &F)       {  return !(F.num <= i*F.denom);  }
+bool operator<=(const Fraction &F, int i)       {  return F.num <= i*F.denom;  }
+bool operator<=(double d, const Fraction &F)    {  return !((double)F.num)/((double)F.denom) <= d;  }
+bool operator<=(const Fraction &F, double d)    {  return ((double)F.num)/((double)F.denom) <= d;  }
 
 // Lesser
 bool operator<(const Fraction &F1, const Fraction &F2) {
   return (F1.num*F2.denom < F2.num*F1.denom);
 }
-bool operator<(int i, const Fraction &F)        {  return F.num >= i*F.denom;  }
-bool operator<(const Fraction &F, int i)        {  return F.num >= i*F.denom;  }
-bool operator<(double d, const Fraction &F)     {  return F.num >= d*F.denom;  }
-bool operator<(const Fraction &F, double d)     {  return F.num >= d*F.denom;  }
+bool operator<(int i, const Fraction &F)        {  return !(F.num < i*F.denom);  }
+bool operator<(const Fraction &F, int i)        {  return F.num < i*F.denom;  }
+bool operator<(double d, const Fraction &F)     {  return !((double)F.num)/((double)F.denom) < d;  }
+bool operator<(const Fraction &F, double d)     {  return ((double)F.num)/((double)F.denom) < d;  }
 
 // Assignment Overloads (Added sensible extras)
 Fraction& Fraction::operator+=(Fraction &F) {
-  return (*this + F);
+  // Get new numerator and denominator.
+  this->num = this->num*F.denom + this->denom*F.num;
+  this->denom *= F.denom;
+  // Get simplest representation.
+  int c = gcd(this->num, this->denom);
+  if(c == 0) {
+    return *this;
+  }
+  // Simplify fraction
+  this->num /= c;
+  this->denom /= c;
+  return *this;
 }
 Fraction& Fraction::operator-=(Fraction &F) {
-  return (*this - F);
+  // Get new numerator and denominator.
+  this->num = this->num*F.denom - this->denom*F.num;
+  this->denom *= F.denom;
+  // Get simplest representation.
+  int c = gcd(this->num, this->denom);
+  if(c == 0) {
+    return *this;
+  }
+  this->num /= c;
+  this->denom /= c;
+  return *this;
 }
 Fraction& Fraction::operator*=(Fraction &F) {
-  return (*this * F);
+  // Get new numerator and denominator.
+  this->num *= F.num;
+  this->denom *= F.denom;
+  // Get simplest representation.
+  int c = gcd(this->num, this->denom);
+  if(c == 0) {
+    return *this;
+  }
+  this->num /= c;
+  this->denom /= c;
+  return *this;
 }
 Fraction& Fraction::operator/=(Fraction &F) {
-  return (*this / F);
+  // Get new numerator and denominator.
+  this->num *= F.denom;
+  this->denom *= F.num;
+  // Get simplest representation.
+  int c = gcd(this->num, this->denom);
+  if(c == 0) {
+    return *this;
+  }
+  this->num /= c;
+  this->denom /= c;
+  return *this;
 }
 
 Fraction& Fraction::operator+=(int i) {
-  this->num += i*this->denom;
+  // Get new numerator and denominator.
+  this->num += this->denom*i;
+  // Get simplest representation.
+  int c = gcd(this->num, this->denom);
+  if(c == 0) {
+    return *this;
+  }
+  this->num /= c;
+  this->denom /= c;
   return *this;
 }
 Fraction& Fraction::operator-=(int i) {
-  this->num -= i*this->denom;
+  // Get new numerator and denominator.
+  this->num -= this->denom*i;
+  // Get simplest representation.
+  int c = gcd(this->num, this->denom);
+  if(c == 0) {
+    return *this;
+  }
+  this->num /= c;
+  this->denom /= c;
   return *this;
 }
 Fraction& Fraction::operator*=(int i) {
-  this->num *=i;
+  // Get new numerator.
+  this->num*=i;
+  // Get simplest representation.
+  int c = gcd(this->num, this->denom);
+  if(c == 0) {
+    return *this;
+  }
+  this->num /= c;
+  this->denom /= c;
   return *this;
 }
 Fraction& Fraction::operator/=(int i) {
+  // Get new denominator.
   this->denom *=i;
+  // Get simplest representation.
+  int c = gcd(this->num, this->denom);
+  if(c == 0) {
+    return *this;
+  }
+  this->num /= c;
+  this->denom /= c;
+  return *this;
   return *this;
 }
 
 // Addition overloads
-Fraction &operator+(const Fraction &F1, const Fraction &F2) {
-  Fraction * temp = nullptr;
-  *temp = Fraction(F1.num*F2.denom + F2.num*F1.denom, F1.denom*F2.denom);
-  return *temp;
+Fraction operator+(const Fraction &F1, const Fraction &F2) {
+  return Fraction(F1.num*F2.denom + F2.num*F1.denom, F1.denom*F2.denom);
 }
-Fraction &operator+(int i, const Fraction &F) {
-  Fraction * temp = nullptr;
-  *temp = Fraction(F.num + i*F.denom, F.denom);
-  return *temp;
+Fraction operator+(int i, const Fraction &F) {
+  return Fraction(F.num + i*F.denom, F.denom);
 }
-Fraction &operator+(const Fraction &F, int i) {
-  Fraction * temp = nullptr;
-  *temp = Fraction(F.num + i*F.denom, F.denom);
-  return *temp;
+Fraction operator+(const Fraction &F, int i) {
+  return Fraction(F.num + i*F.denom, F.denom);
 }
 
 // Subtraction overloads
-Fraction &operator-(const Fraction &F1, const Fraction &F2) {
-  Fraction * temp = nullptr;
-  *temp = Fraction(F1.num*F2.denom - F2.num*F1.denom, F1.denom*F2.denom);
-  return *temp;
+Fraction operator-(const Fraction &F1, const Fraction &F2) {
+  return Fraction(F1.num*F2.denom - F2.num*F1.denom, F1.denom*F2.denom);
 }
-Fraction &operator-(int i, const Fraction &F) {
-  Fraction * temp = nullptr;
-  *temp = Fraction(F.num - i*F.denom, F.denom);
-  return *temp;
+Fraction operator-(int i, const Fraction &F) {
+  return Fraction(i*F.denom - F.num, F.denom);
 }
-Fraction &operator-(const Fraction &F, int i) {
-  Fraction * temp = nullptr;
-  *temp = Fraction(F.num - i*F.denom, F.denom);
-  return *temp;
+Fraction operator-(const Fraction &F, int i) {
+  return Fraction(F.num - i*F.denom, F.denom);
 }
 
 // Multiplication overloads
-Fraction &operator*(const Fraction &F1, const Fraction &F2) {
-  Fraction * temp = nullptr;
-  *temp = Fraction(F1.num*F2.num, F1.denom*F2.denom);
-  return *temp;
+Fraction operator*(const Fraction &F1, const Fraction &F2) {
+  return Fraction(F1.num*F2.num, F1.denom*F2.denom);
 }
-Fraction &operator*(int i, const Fraction &F) {
-  Fraction * temp = nullptr;
-  *temp = Fraction(F.num*i, F.denom);
-  return *temp;
+Fraction operator*(int i, const Fraction &F) {
+  return Fraction(F.num*i, F.denom);
 }
-Fraction &operator*(const Fraction &F, int i) {
-  Fraction * temp = nullptr;
-  *temp = Fraction(F.num*i, F.denom);
-  return *temp;
+Fraction operator*(const Fraction &F, int i) {
+  return Fraction(F.num*i, F.denom);
 }
 
 // Division overloads
-Fraction &operator/(const Fraction &F1, const Fraction &F2) {
-  Fraction * temp = nullptr;
-  *temp = Fraction(F1.num*F2.denom, F1.denom*F2.num);
-  return *temp;
+Fraction operator/(const Fraction &F1, const Fraction &F2) {
+  return Fraction(F1.num*F2.denom, F1.denom*F2.num);
 }
-Fraction &operator/(int i, const Fraction &F) {
-  Fraction * temp = nullptr;
-  *temp = Fraction(F.num, F.denom*i);
-  return *temp;
+Fraction operator/(int i, const Fraction &F) {
+  return Fraction(F.denom*i, F.num);
 }
-Fraction &operator/(const Fraction &F, int i) {
-  Fraction * temp = nullptr;
-  *temp = Fraction(F.num, F.denom*i);
-  return *temp;
+Fraction operator/(const Fraction &F, int i) {
+  return Fraction(F.num, F.denom*i);
 }

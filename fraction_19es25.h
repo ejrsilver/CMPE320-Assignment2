@@ -10,9 +10,7 @@
 #ifndef fraction_19es25_h
 #define fraction_19es25_h
 
-using namespace std;
-
-class FractionException:public exception {
+class FractionException:public std::exception {
   public:
   const char * what() const throw();
 };
@@ -25,17 +23,21 @@ private:
   int gcd(int n, int d);
   
 public:
+  // Constructors
   Fraction();
   Fraction(int n);
   Fraction(int n, int d);
   
+  // Accessors
   int numerator();
   int denominator();
 
   // Unary Overloads
   Fraction &operator-();
   Fraction &operator++();       // Prefix
-  Fraction &operator++(int);  // Postfix
+  Fraction operator++(int);  // Postfix
+  Fraction &operator--();       // Prefix
+  Fraction operator--(int);  // Postfix
   
   // Equality (Covering all reasonably comparable types)
   friend bool operator==(const Fraction &F1, const Fraction &F2);
@@ -82,39 +84,39 @@ public:
   /* Binary Overloads */
   
   // Stream overloads
-  friend ostream &operator<<(ostream &output, const Fraction &F);
-  friend istream &operator>>(istream  &input, Fraction &F);
+  friend std::ostream &operator<<(std::ostream &output, const Fraction &F);
+  friend std::istream &operator>>(std::istream  &input, Fraction &F);
   
   // Assignment Overloads (Added sensible extras)
-  Fraction &operator+=(Fraction &F);
-  Fraction &operator-=(Fraction &F);
-  Fraction &operator*=(Fraction &F);
-  Fraction &operator/=(Fraction &F);
+   Fraction &operator+=(Fraction &F);
+   Fraction &operator-=(Fraction &F);
+   Fraction &operator*=(Fraction &F);
+   Fraction &operator/=(Fraction &F);
   
-  Fraction &operator+=(int i);
-  Fraction &operator-=(int i);
-  Fraction &operator*=(int i);
-  Fraction &operator/=(int i);
+   Fraction &operator+=(int i);
+   Fraction &operator-=(int i);
+   Fraction &operator*=(int i);
+   Fraction &operator/=(int i);
 
   // Addition overloads
-  friend Fraction &operator+(const Fraction &F1, const Fraction &F2);
-  friend Fraction &operator+(int i, const Fraction &F);
-  friend Fraction &operator+(const Fraction &F1, int i);
+  friend Fraction operator+(const Fraction &F1, const Fraction &F2);
+  friend Fraction operator+(int i, const Fraction &F);
+  friend Fraction operator+(const Fraction &F1, int i);
   
   // Subtraction overloads
-  friend Fraction &operator-(const Fraction &F1, const Fraction &F2);
-  friend Fraction &operator-(int i, const Fraction &F);
-  friend Fraction &operator-(const Fraction &F1, int i);
+  friend Fraction operator-(const Fraction &F1, const Fraction &F2);
+  friend Fraction operator-(int i, const Fraction &F);
+  friend Fraction operator-(const Fraction &F1, int i);
 
   // Multiplication overloads
-  friend Fraction &operator*(const Fraction &F1, const Fraction &F2);
-  friend Fraction &operator*(int i, const Fraction &F);
-  friend Fraction &operator*(const Fraction &F1, int i);
+  friend Fraction operator*(const Fraction &F1, const Fraction &F2);
+  friend Fraction operator*(int i, const Fraction &F);
+  friend Fraction operator*(const Fraction &F1, int i);
   
   // Division overloads
-  friend Fraction &operator/(const Fraction &F1, const Fraction &F2);
-  friend Fraction &operator/(int i, const Fraction &F);
-  friend Fraction &operator/(const Fraction &F1, int i);
+  friend Fraction operator/(const Fraction &F1, const Fraction &F2);
+  friend Fraction operator/(int i, const Fraction &F);
+  friend Fraction operator/(const Fraction &F1, int i);
   
 };
 
